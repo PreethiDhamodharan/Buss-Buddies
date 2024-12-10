@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <style>
+    
+    body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-image: url("https://transport.cambridgeshirepeterborough-ca.gov.uk/wp-content/uploads/2021/02/Free-Bus-Passes-Banner-820x410-1.jpg");
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-size:100%;
+}
+
+.admin-container {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.admin-login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-size: 30px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  font-size: 20px;
+  
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-size: 17px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b9b8b8;
+  border-radius: 5px;
+  color: #1d1b1b;
+}
+
+.input-group input:focus {
+  border-color: #cb7e11;
+  outline: none;
+}
+
+.btn {
+  width: 50%;
+  padding: 10px;
+  background: #cba611;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #c5a009;
+  opacity: 0.8;
+    transform: scale(1.1);
+}
+
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <div class="admin-login-form">
+      <h2>Admin Login</h2>
+      <form id="adminLoginForm">
+        <div class="input-group">
+          <label for="adminUsername">Admin Username</label>
+          <input type="text" id="adminUsername" name="adminUsername" placeholder="Enter your username" required>
+        </div>
+        <div class="input-group">
+          <label for="adminPassword">Password</label>
+          <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter your password" required>
+        </div>
+        <div style="display:flex;justify-content: center;">
+          <button type="submit" class="btn">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const username = document.getElementById('adminUsername').value.trim();
+  const password = document.getElementById('adminPassword').value.trim();
+
+  
+  const adminUsername = "admin";
+  const adminPassword = "admin123";
+
+  if (username === adminUsername && password === adminPassword) {
+    alert('Welcome, Admin!');
+    
+    window.location.href = "admin-dashboard.html";
+  } else {
+    alert('Invalid username or password!');
+  }
+});
+
+  </script>
+</body>
+</html>

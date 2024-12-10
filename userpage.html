@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User-page</User-page></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #1E90FF;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+    .user-icon {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .user-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+    .dropdown a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+    }
+    .dropdown a:hover {
+      background-color: #f0f0f0;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #003366;
+      color: white;
+      position: fixed;
+      height: 100%;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 10px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .sidebar a:hover {
+      background-color: #00509E;
+    }
+    .submenu {
+      display: none;
+      margin-left: 20px;
+    }
+    .submenu a {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+    .submenu a:hover {
+      background-color: #004080;
+    }
+    .content {
+      margin-left: 260px;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <center><h1>GOVERNMENT ONLINE BUS BUDDIES</h1></center>
+    <div class="user-icon" onclick="toggleUserDropdown()">
+      <img src="https://via.placeholder.com/40" alt="User Icon">
+      <div class="dropdown" id="userDropdown">
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <h3 style="text-align: center;">Bus Pass</h3>
+    <p style="text-align: center; font-size: 14px;">For any Queries/Comments mail to government@bus.ac.in</p>
+    <a href="#" onclick="showContent('idCardForm')">ID Card</a>
+    <a href="#" onclick="toggleSubmenu()">Pass Renewal</a>
+    <div class="submenu" id="passRenewalSubmenu">
+      <a href="#" onclick="showContent('studentPass')">Student Pass Renewal</a>
+      <a href="#" onclick="showContent('seniorCitizenPass')">Senior Citizen Pass Renewal</a>
+      <a href="#" onclick="showContent('regularPass')">Regular Pass Renewal</a>
+      <a href="#" onclick="showContent('specialPass')">Special Pass Renewal</a>
+    </div>
+    <a href="#" onclick="showContent('fyi')">FYI</a>
+  </div>
+
+  <div class="content" id="mainContent">
+    <p>Select an option from the left menu to display details here.</p>
+  </div>
+
+  <script>
+    // Function to toggle the user dropdown menu
+    function toggleUserDropdown() {
+      const dropdown = document.getElementById("userDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Function to toggle the Pass Renewal submenu
+    function toggleSubmenu() {
+      const submenu = document.getElementById("passRenewalSubmenu");
+      submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+    }
+
+    // Function to display the content based on the clicked link
+    function showContent(contentId) {
+      const mainContent = document.getElementById('mainContent');
+
+      if (contentId === 'idCardForm') {
+        mainContent.innerHTML = `
+          <form id="idCardForm">
+            <h2>ID Card Application Form</h2>
+            <label for="idCardNumber">ID Card Number</label>
+            <input type="text" id="idCardNumber" name="idCardNumber" readonly placeholder="Auto-generated" />
+
+
+            <label for="name">Name</label>
+            <input type="text" id="name" maxlength="12" placeholder="Enter your Number" required />
+            
+
+            <label for="address">Address</label>
+            <input type="textarea" id="address"  placeholder="Enter your Address" required />
+
+            <label for="age">Age</label>
+            <input type="text" id="aadhaarNumber" maxlength="12" placeholder="Enter your age" required />
+
+            <label>Gender:</label>
+            <div class="gender-options">
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male" class="gender-label">Male</label>
+
+            <input type="radio" id="female" name="gender" value="female" required>
+            <label for="female" class="gender-label">Female</label>
+
+            <input type="radio" id="other" name="gender" value="other" required>
+            <label for="other" class="gender-label">Other</label>
+            </div>
+
+            <label for="photo">Upload Photo</label>
+            <input type="file" id="photo" required />
+
+            <label for="aadhaarNumber">Aadhaar Number</label>
+            <input type="text" id="aadhaarNumber" maxlength="12" placeholder="Enter Aadhaar Number" required />
+
+            <label for="Aadharphoto">Upload Aadhar Photo</label>
+            <input type="file" id="Aadharphoto" required />
+
+            <label for="validity">Validity</label>
+            <input type="text" id="validity" name="validity" readonly placeholder="Auto-calculated (2 years from today)" />
+
+    
+
+            <button type="submit">Apply</button>
+          </form>
+        `;
+
+        // Auto-generate ID Card Number
+        const idCardNumber = 'ID-' + Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('idCardNumber').value = idCardNumber;
+
+        // Auto-calculate Validity Date
+        const today = new Date();
+        const expiryDate = new Date();
+        expiryDate.setFullYear(today.getFullYear() + 2);
+
+        const validity = `${today.toLocaleDateString()} - ${expiryDate.toLocaleDateString()}`;
+        document.getElementById('validity').value = validity;
+      } else if (contentId === 'studentPass') {
+        mainContent.innerHTML = `<h2>Student Pass Renewal</h2><p>Details about student pass renewal go here.</p>`;
+      } else if (contentId === 'seniorCitizenPass') {
+        mainContent.innerHTML = `<h2>Senior Citizen Pass Renewal</h2><p>Details about senior citizen pass renewal go here.</p>`;
+      } else if (contentId === 'regularPass') {
+        mainContent.innerHTML = `<h2>General Pass Renewal</h2><p>Details about general pass renewal go here.</p>`;
+      } else if (contentId === 'specialPass') {
+        mainContent.innerHTML = `<h2>Special Pass Renewal</h2><p>Details about special pass renewal go here.</p>`;
+      } else if (contentId === 'fyi') {
+        mainContent.innerHTML = `<h2>FYI</h2><p>Details about all pass renewal options go here.</p>`;
+      }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-image: url("https://transport.cambridgeshirepeterborough-ca.gov.uk/wp-content/uploads/2021/02/Free-Bus-Passes-Banner-820x410-1.jpg");
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-size:100%;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-size: 30px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  font-size: 20px;
+  
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-size: 17px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b9b8b8;
+  border-radius: 5px;
+  color: #1d1b1b;
+}
+
+.input-group input:focus {
+  border-color: #cb7e11;
+  outline: none;
+}
+
+.btn {
+  width: 50%;
+  padding: 10px;
+  background: #cba611;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #c5a009;
+  opacity: 0.8;
+    transform: scale(1.1);
+}
+
+
+.signup-link {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.signup-link a {
+  color:white;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>User Login</h2>
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="Username"> Username</label>
+          <input type="text" id="Username" name="Username" placeholder="Enter your username" required>
+        </div>
+        <div class="input-group">
+          <label for="Password">Password</label>
+          <input type="password" id="Password" name="Password" placeholder="Enter your password" required>
+        </div>
+        <div style="display:flex;justify-content: center;">
+          <button type="submit" class="btn">Login</button>
+        </div>
+        <p class="signup-link">Don't have an account? <a href="usersignup.html">Sign up</a></p>
+      </form>
+    </div>
+  </div>
+  <script>
+    
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+  
+    const username = document.getElementById('Username').value.trim();
+    const password = document.getElementById('Password').value.trim();
+
+    if (username === '' || password === '') {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    // Send data to the server for validation
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert(`Welcome, ${username}!`);
+          window.location.href = 'userpage.html'; // Redirect to user dashboard
+        } else {
+          alert('Invalid username or password.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      });
+  });
+
+</script>
+
+  
+</body>
+</html>
